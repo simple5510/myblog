@@ -1,13 +1,15 @@
 import datetime
 
+from django.contrib import auth
+from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db.models import Sum
-from django.shortcuts import render_to_response
-from django.contrib.contenttypes.models import ContentType
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils import timezone
 
-from read_statistics.utils import get_seven_days_data
 from blog.models import Blog
+from read_statistics.utils import get_seven_days_data
 
 
 # 获得一段时间内的热门博客
@@ -47,4 +49,16 @@ def home(request):
     context['seven_days_hot_data'] = seven_days_hot_data
     context['dates'] = dates
     context['read_nums'] = read_nums
-    return render_to_response('home.html', context)
+    return render(request, 'home.html', context)
+
+
+def login(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(request, username=username, password=password)
+    request.META.get('HTTP_REFERER', reverse('home'))
+    if user is not None:
+        auth.login(request, user)
+        return redirect('/')
+    else:
+        return render(request, 'error.html', {'message': '用户名或密码不正确'})
