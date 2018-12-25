@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.urls import reverse
 
-from comment.forms import CommentForm
+from .forms import CommentForm
 from .models import Comment
 
 
@@ -15,14 +15,16 @@ def update_comment(request):
         comment = Comment()
         comment.user = comment_form.cleaned_data['user']
         comment.text = comment_form.cleaned_data['text']
-        comment.content_type = comment_form.cleaned_data['content_type']
+        comment.content_object = comment_form.cleaned_data['content_object']
         comment.save()
+
         # 返回数据
         data['status'] = 'SUCCESS'
         data['username'] = comment.user.username
         data['comment_time'] = comment.comment_time.strftime('%Y-%m-%d %H:%M:%S')
         data['text'] = comment.text
     else:
+        # return render(request, 'error.html', {'message': comment_form.errors, 'redirect_to': referer})
         data['status'] = 'ERROR'
         data['message'] = list(comment_form.errors.values())[0][0]
     return JsonResponse(data)
