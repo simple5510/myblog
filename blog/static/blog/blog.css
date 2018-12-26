@@ -13,7 +13,6 @@ div.blog h3 {
 div.blog p.blog-info {
     margin-bottom: 0;
 }
-
 div.paginator {
     text-align: center;
 }
@@ -31,7 +30,6 @@ ul.blog-info-description li {
 div.blog-content {
     text-indent: 2em;
 }
-
 div.blog-more {
     margin-top: 1em;
 }
@@ -39,7 +37,6 @@ div.blog-more {
 div.comment-area {
     margin-top: 2em;
 }
-
 h3.comment-area-title {
     border-bottom: 1px solid #ccc;
     padding-bottom: 0.4em;
@@ -47,4 +44,14 @@ h3.comment-area-title {
 
 div.django-ckeditor-widget {
     width: 100%;
+}
+
+div.comment {
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+div.reply {
+    margin-left: 2em;
 }
