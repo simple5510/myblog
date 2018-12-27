@@ -10,7 +10,7 @@ class LikeCount(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    like_num = models.IntegerField(default=0)
+    liked_num = models.IntegerField(default=0)
 
 
 class LikeRecord(models.Model):

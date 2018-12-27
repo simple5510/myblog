@@ -14,10 +14,10 @@ def ErrorResponse(code, message):
     return JsonResponse(data)
 
 
-def SuccessResponse(like_num):
+def SuccessResponse(liked_num):
     data = {}
     data['status'] = 'SUCCESS'
-    data['like_num'] = like_num
+    data['liked_num'] = liked_num
     return JsonResponse(data)
 
 
@@ -45,9 +45,9 @@ def like_change(request):
             # 未点赞过，进行点赞
             like_count, created = LikeCount.objects.get_or_create(
                 content_type=content_type, object_id=object_id)
-            like_count.like_num += 1
+            like_count.liked_num += 1
             like_count.save()
-            return SuccessResponse(like_count.like_num)
+            return SuccessResponse(like_count.liked_num)
         else:
             # 已点赞过，不能重复点赞
             return ErrorResponse(402, 'you were liked')
@@ -62,9 +62,9 @@ def like_change(request):
             like_count, created = LikeCount.objects.get_or_create(
                 content_type=content_type, object_id=object_id)
             if not created:
-                like_count.like_num -= 1
+                like_count.liked_num -= 1
                 like_count.save()
-                return SuccessResponse(like_count.like_num)
+                return SuccessResponse(like_count.liked_num)
             else:
                 return ErrorResponse(404, 'data error')
         else:
