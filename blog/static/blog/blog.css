@@ -29,6 +29,7 @@ ul.blog-info-description li {
 
 div.blog-content {
     text-indent: 2em;
+    margin-bottom: 2em;
 }
 div.blog-more {
     margin-top: 1em;
@@ -54,7 +55,6 @@ div.comment {
 div.reply {
     margin-left: 2em;
 }
-
 div#reply_content_container {
     border: 1px solid #d1d1d1;
     border-bottom: none;
@@ -62,8 +62,18 @@ div#reply_content_container {
     overflow: hidden;
     padding: 1em 1em 0.5em;
 }
-
 p#reply_title {
     border-bottom: 1px dashed #ccc;
     padding-bottom: 0.5em;
+}
+
+div.like {
+    color: #337ab7;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5em 0.3em;
+}
+
+div.like .active {
+    color: #f22;
 }
